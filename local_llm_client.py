@@ -1,7 +1,9 @@
-# local_llm_client.py
-import lmstudio as lms
+from openai import OpenAI
 
 SERVER_API_HOST = "localhost:1234"
+MODEL = "llama-3.2-8b-instruct"
+
+client = OpenAI(base_url=f"http://{SERVER_API_HOST}/v1", api_key="lm-studio")
 
 def run_llm(prompt, system_message="You are a helpful assistant."):
     """
@@ -15,14 +17,17 @@ def run_llm(prompt, system_message="You are a helpful assistant."):
         str: The LLM response
     """
     try:
-        with lms.Client(SERVER_API_HOST) as client:
-            model = client.llm.model("llama-3.2-8b-instruct")
-
-            # Combine system message and user prompt
-            full_prompt = f"System: {system_message}\n\nUser: {prompt}"
-
-            result = model.respond(full_prompt)
-            return result
+        return client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=1500,
+            temperature=0.7
+        ).choices[0].message.content.strip()
+        # Connect to the LM Studio client
+        # Using the OpenAI client to connect to LM Studio
 
     except Exception as e:
         print(f"Error connecting to LM Studio: {e}")

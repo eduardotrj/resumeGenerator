@@ -1,1 +1,22 @@
-Error: Could not generate response. Make sure LM Studio is running on localhost:1234
+Here's a persuasive and personalized cover letter based on the provided job offer and revised resume:
+
+Dear Hiring Manager,
+
+I am thrilled to apply for the Back End Engineer position at your esteemed research-driven company, where I can leverage my expertise in Java and Python to contribute to the development of innovative artificial intelligence solutions. As a seasoned Back End Engineer with a passion for building scalable and resilient applications, I am confident that my skills and experience make me an ideal fit for this role.
+
+With over 12 months of commercial development experience, I have honed my expertise in designing and optimizing REST APIs for microservice architecture principles, deploying backend services on AWS, and enhancing database efficiency. My most recent experience as a Back End Developer at HABLA (01/2024 - 04/2025) has provided me with the opportunity to work on complex projects that align with your company's values of innovation and disruption.
+
+In my current role, I have successfully designed and optimized REST APIs using Python (FastAPI, Django) for scalable applications, deployed backend services on AWS (EC2, S3, Lambda, RDS, API Gateway), and enhanced database efficiency through SQL query optimization. These achievements demonstrate my ability to work with a variety of languages, frameworks, and tools, aligning perfectly with your company's expectations.
+
+I am particularly drawn to this role because of the opportunity to work on AI and Machine Learning projects, which aligns with my interests and experience in these areas. My degree in Computer Science has provided me with a solid foundation in computer science principles, and I have continued to develop my skills through hands-on experience with modern backend technologies such as Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes.
+
+I am excited about the opportunity to join your team of talented engineers and contribute to building innovative AI solutions that are pushing the boundaries of what is possible. With 3 days a week in the office at Notting Hill, I look forward to collaborating with your team and learning from their expertise.
+
+Please find my resume attached for your review. I would be delighted to discuss this opportunity further and explain in greater detail why I am the ideal candidate for this role.
+
+Thank you for considering my application.
+
+Best regards,
+
+Eduardo Trujillo
+Back End Engineer (Java & Python)
