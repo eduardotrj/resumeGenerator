@@ -1,0 +1,10 @@
+You are a professional resume editor. Adapt the resume below to align closely with the following job offer.
+
+--- Job Offer ---
+{job_offer}
+
+--- Resume ---
+{resume}
+
+--- Output ---
+Return only the improved resume, formatted and tailored for the job above.
