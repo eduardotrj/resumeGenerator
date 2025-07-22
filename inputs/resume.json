@@ -14,25 +14,19 @@
       "region": "London"
     }
   },
-  "location": {
-      "address": "33 Zion house",
-      "postalCode": "E1 3EN",
-      "city": "London",
-      "countryCode": "United Kingdom"
-    },
-  "profiles": {
+  "profiles": [{
     "linkedIn": "https://www.linkedin.com/in/eduardotrj/",
     "github": "https://github.com/eduardotrj",
     "website": "https://eduardotrj.github.io/website/",
     "substack": "https://elguardian.substack.com/",
     "portfolio": "https://eduardotrj.github.io/website/"
-  },
-  "workExperience": {
-    "BACKEND-DEVELOPER": {
-      "company": "HABLA",
-      "dates": "01/2024 - 04/2025",
-      "startDate": "2024-01-01",
-      "endDate": "2025-04-01",
+  }],
+  "work": [{
+    "title": "BACKEND-DEVELOPER",
+    "company": "HABLA",
+    "dates": "01/2024 - 04/2025",
+    "startDate": "2024-01-01",
+    "endDate": "2025-04-01",
       "summary": [
         "• Designed and optimized REST APIs using Python (FastAPI, Django) for scalable applications, aligning with microservice architecture principles.",
         "• Implemented backend services deployed on AWS (EC2, S3, Lambda, RDS, API Gateway) to enhance platform performance by 20%.",
@@ -41,7 +35,8 @@
         "• Collaborated in Agile team settings, actively participating in code reviews and unit testing to uphold software quality standards."
       ]
     },
-    "WEB DEVELOPER": {
+    {
+      "title": "WEB DEVELOPER",
       "company": "Valor de Ley",
       "startDate": "2021-10-01",
       "endDate": "2023-12-31",
@@ -52,23 +47,53 @@
         "• Implemented security best practices to reduce vulnerabilities by 85%, ensuring the reliability and security of the platform.",
         "• Mentored junior developers to enhance team productivity and foster a culture of continuous learning and improvement."
       ]
-    }
-  },
-  "technicalSkills": {
-    "programmingLanguages": ["Python", "Java", "Kotlin", "JavaScript", "SQL", "C", "C++", "PHP"],
-    "generativeAI": ["OpenAI", "LLama", "LangChain", "RAG"],
-    "databaseSystems": ["SQL (MySQL, PostgreSQL)", "Big Query", "MongoDB", "DynamoDB", "Firebase"],
-    "dataScienceAndMLLibraries": ["Pandas", "NumPy", "Scikit-learn"],
-    "machineLearning": ["Supervised Learning", "Unsupervised Learning"],
-    "webDevelopment": ["Django", "FastAPI", "Typescript, React", "HTML", "CSS", "Laravel", "Spring Boot"],
-    "cloudAndDevOps": ["AWS (EC2, S3)", "Docker", "Kubernetes", "Microservices"],
-    "testingAndDebugging": ["Pytest", "Selenium", "Postman", "Jest"],
-    "Electronics Design": ["Eagle", "Proteus", "KitCad", "Microcontrollers"],
-    "CI_CD": ["Jenkins", "GitHub Actions", "GitLab CI/CD"],
-    "automationAndWebScraping": ["Selenium", "Beautiful Soup"],
-    "agileMethodologies": ["Scrum", "TDD Agile", "DevOps", "CI/CD"],
-    "internet": ["REST APIs", "GraphQL", "WebSockets", "AsyncAPI", "RabbitMQ", "Celery", "Redis", "cybersecurity"]
-  },
+    }],
+  "skills": [
+    {
+    "programmingLanguages": ["Python", "Java", "Kotlin", "JavaScript", "SQL", "C", "C++", "PHP"]
+    },
+    {
+      "generativeAI": ["OpenAI", "LLama", "LangChain", "RAG"]
+    },
+    {
+    "databaseSystems": ["SQL (MySQL, PostgreSQL)", "Big Query", "MongoDB", "DynamoDB", "Firebase"]
+    },
+    {
+      "versionControl": ["Git", "GitHub", "GitLab"]
+    },
+    {
+      "operatingSystems": ["Linux", "Windows", "MacOS"]
+    },
+    {
+      "dataScienceAndMLLibraries": ["Pandas", "NumPy", "Scikit-learn"]
+    },
+    {
+      "machineLearning": ["Supervised Learning", "Unsupervised Learning"]
+    },
+    {
+      "webDevelopment": ["Django", "FastAPI", "Typescript, React", "HTML", "CSS", "Laravel", "Spring Boot"]
+    },
+    {
+      "cloudAndDevOps": ["AWS (EC2, S3)", "Docker", "Kubernetes", "Microservices"]
+    },
+    {
+      "testingAndDebugging": ["Pytest", "Selenium", "Postman", "Jest"]
+    },
+    {
+      "Electronics Design": ["Eagle", "Proteus", "KitCad", "Microcontrollers"]
+    },
+    {
+      "CI_CD": ["Jenkins", "GitHub Actions", "GitLab CI/CD"]
+    },
+    {
+      "automationAndWebScraping": ["Selenium", "Beautiful Soup"]
+    },
+    {
+      "agileMethodologies": ["Scrum", "TDD Agile", "DevOps", "CI/CD"]
+    },
+    {
+      "internet": ["REST APIs", "GraphQL", "WebSockets", "AsyncAPI", "RabbitMQ", "Celery", "Redis", "cybersecurity"]
+    }],
   "languages": [{
     "language": "English",
     "fluency": "Native speaker"
@@ -81,33 +106,36 @@
     "language": "German",
     "fluency": "Intermediate"
   }],
-  "project": {
-    "inventory Management System": {
-      "stack": ["Django", "Celery", "OpenAi", "PostgreSQL", "RabbitMQ", "React", "Celery", "Redis"],
-      "description": "A web application for managing inventory, built with Django and PostgreSQL, designed to handle large datasets efficiently.",
-      "link": ""
-    },
-    "ChatBot App": {
-      "stack": ["Django", "Celery", "OpenAi", "RabbitMQ", "React"],
-      "description": "A chatbot application that integrates with OpenAI's API to provide conversational AI capabilities.",
-      "link": "https://github.com/eduardotrj/chatbot-chatGPT"
-    },
-    "Recipe API": {
-      "stack": ["Django", "spectacular", "uwsgi"],
-      "description": "A RESTful API for managing recipes, built with Django and designed to handle a large number of requests efficiently.",
-      "link": "https://github.com/eduardotrj/recipe-app-api"
-    },
-    "Customize NotePad": {
-      "stack": ["Python", "Tkinder"],
-      "description": "A customizable notepad application built with Python and Tkinter, allowing users to create and manage notes easily.",
-      "link": "https://github.com/eduardotrj/notepad-py"
-    },
-    "QR Manager": {
-      "stack": ["Kotlin"],
-      "description": "An Android application for managing QR codes, built with Kotlin to provide a user-friendly interface for scanning and generating QR codes.",
-      "link": ""
-    }
+  "project": [{
+    "name": "inventory Management System",
+    "stack": ["Django", "Celery", "OpenAi", "PostgreSQL", "RabbitMQ", "React", "Celery", "Redis"],
+    "description": "A web application for managing inventory, built with Django and PostgreSQL, designed to handle large datasets efficiently.",
+    "link": ""
   },
+  {
+    "name": "ChatBot App",
+    "stack": ["Django", "Celery", "OpenAi", "RabbitMQ", "React"],
+    "description": "A chatbot application that integrates with OpenAI's API to provide conversational AI capabilities.",
+    "link": "https://github.com/eduardotrj/chatbot-chatGPT"
+  },
+  {
+    "name": "Recipe API",
+    "stack": ["Django", "spectacular", "uwsgi"],
+    "description": "A RESTful API for managing recipes, built with Django and designed to handle a large number of requests efficiently.",
+    "link": "https://github.com/eduardotrj/recipe-app-api"
+  },
+  {
+    "name": "Customize NotePad",
+    "stack": ["Python", "Tkinder"],
+    "description": "A customizable notepad application built with Python and Tkinter, allowing users to create and manage notes easily.",
+    "link": "https://github.com/eduardotrj/notepad-py"
+  },
+  {
+    "name": "QR Manager",
+    "stack": ["Kotlin"],
+    "description": "An Android application for managing QR codes, built with Kotlin to provide a user-friendly interface for scanning and generating QR codes.",
+    "link": ""
+    }],
   "education": [
     {
       "institution": "DION Trainning",

@@ -1,0 +1,1 @@
+Error: Could not generate response. Make sure LM Studio is running on localhost:1234
