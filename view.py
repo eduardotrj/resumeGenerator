@@ -169,11 +169,11 @@ class ResumeGeneratorGUI:
 
         if result['status'] == 'success':
             # Show success message with file paths
+            files_list = "\n".join([f"• {os.path.basename(f)}" for f in result.get('files_created', [])])
+
             success_message = (
                 f"✅ {result['message']}\n\n"
-                f"Files created:\n"
-                f"• Resume: {result['resume_file']}\n"
-                f"• Cover Letter: {result['cover_letter_file']}\n\n"
+                f"Files created:\n{files_list}\n\n"
                 f"Would you like to open the output folder?"
             )
 

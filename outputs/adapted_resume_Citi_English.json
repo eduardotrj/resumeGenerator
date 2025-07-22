@@ -1,0 +1,122 @@
+{
+  "name": "Eduardo Trujillo",
+  "label": "Software Developer",
+  "summary": "Cloud Architecture specialist with expertise in containerized development environments, code accelerators, and modern cloud-native solutions.",
+  "contactInfo": {
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "location": {
+      "address": "London, United Kingdom",
+      "postalCode": "",
+      "city": "London",
+      "countryCode": "GBR",
+      "region": ""
+    }
+  },
+  "profiles": [
+    {
+      "linkedIn": {
+        "type": "string"
+      },
+      "github": {
+        "type": "string"
+      },
+      "website": {
+        "type": "string"
+      },
+      "substack": {
+        "type": "string"
+      },
+      "portfolio": {
+        "type": "string"
+      }
+    }
+  ],
+  "work": [
+    {
+      "title": "Backend Developer at Habla",
+      "company": "Habla",
+      "startDate": "01/2024",
+      "endDate": "04/2025",
+      "summary": [
+        "Designed and optimized REST APIs using Python (FastAPI, Django) for scalable applications.",
+        "Implemented backend services deployed on AWS (EC2, S3, Lambda, RDS, API Gateway)."
+      ]
+    },
+    {
+      "title": "Web Developer at Valor de Ley",
+      "company": "Valor de Ley",
+      "startDate": "2021-10-01",
+      "endDate": "2023-12-31",
+      "summary": [
+        "Developed and maintained web applications using Javascript, CSS, HTML, and PHP.",
+        "Improved website SEO and load speed."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Cloud Architecture",
+      "level": "Intermediate",
+      "keywords": [
+        "AWS",
+        "GCP"
+      ]
+    },
+    {
+      "name": "Containerization",
+      "level": "Advanced",
+      "keywords": [
+        "Docker",
+        "Podman"
+      ]
+    },
+    {
+      "name": "Programming Languages",
+      "level": "Expert",
+      "keywords": [
+        "Python",
+        "Java",
+        "Bash",
+        "Terraform"
+      ]
+    },
+    {
+      "name": "Version Control Systems",
+      "level": "Advanced",
+      "keywords": [
+        "Git"
+      ]
+    },
+    {
+      "name": "DevOps Tools",
+      "level": "Intermediate",
+      "keywords": [
+        "CI/CD",
+        "Azure DevOps",
+        "GitHub Actions"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native"
+    }
+  ],
+  "education": [
+    {
+      "institution": "",
+      "studyType": "",
+      "location": "",
+      "course": "",
+      "startDate": "",
+      "endDate": ""
+    }
+  ],
+  "projects": []
+}

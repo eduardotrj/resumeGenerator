@@ -1,0 +1,31 @@
+Here's a persuasive and personalized cover letter for Eduardo Trujillo based on the job offer and his resume:
+
+---
+
+Eduardo Trujillo
+[Address]
+London, GBR
+
+[Date]
+
+Hiring Manager,
+Cloud Architecture Team,
+Enterprise Technology,
+
+Dear Hiring Manager,
+
+I am thrilled to apply for the Cloud Architecture role at Enterprise Technology, where I can leverage my expertise in containerized development environments, code accelerators, and modern cloud-native solutions. As a seasoned software developer with a strong background in Python, Java, and Linux command line, I am confident that I would be an excellent fit for this position.
+
+With my experience as a Backend Developer at Habla, where I designed and optimized REST APIs using Python (FastAPI, Django) for scalable applications, I have developed a deep understanding of cloud-native architecture and containerized development environments. My proficiency in AWS services such as EC2, S3, Lambda, RDS, and API Gateway has also equipped me with the knowledge to set up, test, and troubleshoot containerized development environments using Podman.
+
+I am particularly drawn to this role because of the opportunity to contribute to the development of code accelerators, write small tools to support developer workflows or demos, and participate in hands-on prototyping or demos of architectural patterns for internal teams. My experience as a Web Developer at Valor de Ley has taught me the importance of clear documentation and guides, which I believe is essential in making it easier for teams to adopt cloud-native solutions.
+
+I am impressed by Enterprise Technology's commitment to delivering reference architectures, code accelerators, and production-grade examples, while offering advisory services and collaborative engagement with teams. As a proactive learner with a strong academic background in Computer Science, I am eager to learn and explore new tools and cloud native technologies under the guidance of senior team members.
+
+In addition to my technical skills, I possess strong written and verbal communication skills, which have been essential in my previous roles as a developer. I believe that effective communication is crucial in educating others about new tools and technologies.
+
+I would welcome the opportunity to discuss how my skills and experience align with the requirements of this role. Please find attached my resume for your reference. Thank you for considering my application.
+
+Sincerely,
+
+Eduardo Trujillo

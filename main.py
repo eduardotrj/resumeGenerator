@@ -10,13 +10,40 @@ def load_json(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def load_schema():
+    """Load the resume schema from schema.py"""
+    import sys
+    sys.path.append('prompt_templates')
+    try:
+        from schema import schema
+        return json.dumps(schema, indent=2)
+    except ImportError:
+        # Fallback schema if file not found
+        return json.dumps({
+            "name": "string",
+            "label": "string",
+            "summary": "string",
+            "contactInfo": {"email": "string", "phone": "string", "location": {}},
+            "profiles": [{"linkedIn": "string", "github": "string"}],
+            "work": [{"title": "string", "company": "string", "summary": ["string"]}]
+        }, indent=2)
+
 def save_text(file_path, content):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content.strip())
 
+def save_json(file_path, data):
+    """Save data as JSON file"""
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
 def format_prompt(template_path, **kwargs):
     template = load_text(template_path)
+    # Add schema to kwargs if not present
+    if 'schema' not in kwargs:
+        kwargs['schema'] = load_schema()
     return template.format(**kwargs)
 
 def json_to_resume_text(resume_data):
@@ -67,9 +94,9 @@ def generate_resume_and_cover_letter(form_data):
 
         # Create language-specific system messages
         language_prompts = {
-            'English': "You are a professional resume editor. Respond in English.",
-            'Spanish': "Eres un editor profesional de currículums. Responde en español.",
-            'German': "Sie sind ein professioneller Lebenslauf-Editor. Antworten Sie auf Deutsch."
+            'English': "You are a professional resume editor. Respond in English with valid JSON only.",
+            'Spanish': "Eres un editor profesional de currículums. Responde solo en español con JSON válido.",
+            'German': "Sie sind ein professioneller Lebenslauf-Editor. Antworten Sie nur auf Deutsch mit gültigem JSON."
         }
 
         system_message = language_prompts.get(language, language_prompts['English'])
@@ -79,28 +106,67 @@ def generate_resume_and_cover_letter(form_data):
                                     resume=resume_text,
                                     job_offer=job_offer)
 
-        adapted_resume = run_llm(resume_prompt, system_message)
+        adapted_resume_json = run_llm(resume_prompt, system_message)
 
-        # Create output filename with company name
-        safe_company_name = "".join(c for c in company_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
-        safe_company_name = safe_company_name.replace(' ', '_')
+        # Try to parse the JSON response
+        try:
+            # Clean the response to extract JSON
+            cleaned_response = adapted_resume_json.strip()
+            if cleaned_response.startswith('```json'):
+                cleaned_response = cleaned_response[7:]
+            if cleaned_response.endswith('```'):
+                cleaned_response = cleaned_response[:-3]
+            cleaned_response = cleaned_response.strip()
 
-        resume_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.txt"
-        save_text(resume_filename, adapted_resume)
+            adapted_resume_data = json.loads(cleaned_response)
 
-        # Generate Cover Letter
+            # Create output filenames with company name
+            safe_company_name = "".join(c for c in company_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+            safe_company_name = safe_company_name.replace(' ', '_')
+
+            # Save JSON format
+            resume_json_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.json"
+            save_json(resume_json_filename, adapted_resume_data)
+
+            # Convert JSON back to text for cover letter and text output
+            adapted_resume_text = json_to_resume_text(adapted_resume_data)
+            resume_text_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.txt"
+            save_text(resume_text_filename, adapted_resume_text)
+
+        except json.JSONDecodeError as e:
+            # Fallback: save as text if JSON parsing fails
+            print(f"Warning: Could not parse JSON response. Saving as text. Error: {e}")
+            safe_company_name = "".join(c for c in company_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+            safe_company_name = safe_company_name.replace(' ', '_')
+
+            resume_text_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.txt"
+            save_text(resume_text_filename, adapted_resume_json)
+            adapted_resume_text = adapted_resume_json
+            resume_json_filename = None
+
+        # Generate Cover Letter (using text format)
+        cover_letter_system = language_prompts.get(language, "You are a professional recruiter. Respond in English.")
+        cover_letter_system = cover_letter_system.replace("with valid JSON only", "").replace("con JSON válido", "").replace("mit gültigem JSON", "")
+
         cover_prompt = format_prompt("prompt_templates/cover_letter_prompt.txt",
-                                   resume=adapted_resume,
+                                   resume=adapted_resume_text,
                                    job_offer=job_offer)
 
-        cover_letter = run_llm(cover_prompt, system_message)
+        cover_letter = run_llm(cover_prompt, cover_letter_system)
         cover_filename = f"outputs/cover_letter_{safe_company_name}_{language}.txt"
         save_text(cover_filename, cover_letter)
 
+        # Prepare return message
+        files_created = [resume_text_filename, cover_filename]
+        if resume_json_filename:
+            files_created.insert(0, resume_json_filename)
+
         return {
             'status': 'success',
-            'resume_file': resume_filename,
+            'resume_file': resume_text_filename,
+            'resume_json_file': resume_json_filename if resume_json_filename else None,
             'cover_letter_file': cover_filename,
+            'files_created': files_created,
             'message': f'Resume and cover letter generated successfully for {company_name} in {language}'
         }
 
