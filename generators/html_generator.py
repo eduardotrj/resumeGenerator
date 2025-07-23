@@ -180,7 +180,7 @@ def _generate_education_html(resume_data):
             education_html += f'''
                 <div class="education-item item">
                     <div class="studyType boldText allInLine">{edu.get('studyType', '')}</div><span> | </span>
-                    <div class="work-title boldText allInLine">{edu.get('area', '')}</div><span> | </span>
+                    <div class="work-title boldText allInLine">{edu.get('course', '')}</div><span> | </span>
                     <div class="education-institution regularText allInLine">{edu.get('institution', '')}</div><span> | </span>
                     <div class="date-range regularText allInLine">{edu.get('startDate', '')} - {edu.get('endDate', '')}</div><span> | </span>
                     <div class="location regularText allInLine">{location_str}</div>

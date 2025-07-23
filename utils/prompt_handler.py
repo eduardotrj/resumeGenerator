@@ -93,6 +93,7 @@ Create a personalized cover letter that:
 4. Demonstrates knowledge of the company/role
 5. Includes a strong opening and closing
 6. Keeps professional tone throughout
+7. Avoid including any extra information or text before "Dear Hiring Manager" or similar salutation
 """
 
     return cover_prompt, system_message

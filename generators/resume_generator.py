@@ -6,8 +6,11 @@ from processors.resume_processor import (
     parse_llm_json_response, merge_resume_data, create_safe_filename
 )
 from generators.html_generator import generate_html_resume
+from generators.html_pdf_generator import html_to_pdf
+from generators.txt_pdf_generator import TxtToPDF
 from db.db import save_generation
 
+#
 
 def generate_resume_and_cover_letter(form_data):
     """
@@ -34,6 +37,7 @@ def generate_resume_and_cover_letter(form_data):
         language = form_data.get('language', 'English')
         city = form_data.get('city', '')
         country_code = form_data.get('country_code', '')
+        name = form_data.get('name', 'Applicant')
 
         # Create adaptation prompt
         adaptation_prompt, system_message = create_adaptation_prompt(job_offer, adapt_text, language)
@@ -49,6 +53,8 @@ def generate_resume_and_cover_letter(form_data):
 
         # Create safe filename
         safe_company_name = create_safe_filename(company_name)
+
+        name_person = create_safe_filename(resume_data.get('name', name))
 
         if json_parse_success and adapted_content:
             # Merge adapted content with base resume
@@ -73,6 +79,7 @@ def generate_resume_and_cover_letter(form_data):
             html_filename = generate_html_resume(final_resume, company_name, language, country_code, city)
             if html_filename:
                 print(f"🌐 HTML file saved: {html_filename}")
+                html_to_pdf(html_filename, f"outputs/{safe_company_name}/{name_person}_resume.pdf")
                 save_generation(company_name, job_offer, language, country_code, city)
 
         else:
@@ -90,7 +97,7 @@ def generate_resume_and_cover_letter(form_data):
         # Generate cover letter
         cover_letter_file = _generate_cover_letter(
             company_name, job_offer, adapted_resume_text if 'adapted_resume_text' in locals() else adapt_text,
-            language, safe_company_name
+            language, safe_company_name, name_person
         )
 
         # Prepare response
@@ -122,7 +129,7 @@ def generate_resume_and_cover_letter(form_data):
         }
 
 
-def _generate_cover_letter(company_name, job_offer, resume_content, language, safe_company_name):
+def _generate_cover_letter(company_name, job_offer, resume_content, language, safe_company_name, name_person):
     """Generate cover letter using LLM"""
     cover_prompt, cover_system = create_cover_letter_prompt(company_name, job_offer, resume_content, language)
 
@@ -132,6 +139,11 @@ def _generate_cover_letter(company_name, job_offer, resume_content, language, sa
     cover_filename = f"outputs/{safe_company_name}/cover_letter_{safe_company_name}_{language}.txt"
     save_text(cover_filename, cover_letter)
     print(f"💌 Cover letter saved: {cover_filename}")
+
+    name_person = name_person.replace(" ", "_")
+
+    conversor = TxtToPDF(font="Arial", font_size=9, title_font_size=16)
+    conversor.convert(cover_filename, f"outputs/{safe_company_name}/cover_letter_{name_person}.pdf", title=f"Cover Letter - {name_person}")
 
     return cover_filename
 

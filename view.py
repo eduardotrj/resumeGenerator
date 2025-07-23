@@ -3,7 +3,7 @@ from tkinter import ttk, scrolledtext
 from tkinter import messagebox
 import threading
 import os
-from main import generate_resume_and_cover_letter
+from generators.resume_generator import generate_resume_and_cover_letter  # , test_llm_json
 
 
 class ResumeGeneratorGUI:

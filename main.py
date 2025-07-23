@@ -1,12 +1,11 @@
 import sys
 import os
 from db.db import init_db
+# from generators.resume_generator import generate_resume_and_cover_letter, test_llm_json
 
 
 # Add current directory to Python path for imports
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-from generators.resume_generator import generate_resume_and_cover_letter, test_llm_json
 
 
 def main():
