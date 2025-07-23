@@ -285,7 +285,7 @@ def _save_html_file(html_content, company_name, language):
     from processors.resume_processor import create_safe_filename
 
     safe_company_name = create_safe_filename(company_name)
-    html_filename = f"outputs/resume_{safe_company_name}_{language}.html"
+    html_filename = f"outputs/{safe_company_name}/resume_{safe_company_name}_{language}.html"
     os.makedirs(os.path.dirname(html_filename), exist_ok=True)
 
     with open(html_filename, "w", encoding="utf-8") as f:

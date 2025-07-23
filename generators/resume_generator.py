@@ -1,5 +1,5 @@
 from local_llm_client import run_llm
-from utils.file_operations import load_json, save_json, save_text
+from utils.file_operations import load_json, save_json, save_text, create_folder_if_not_exists
 from utils.prompt_handler import create_adaptation_prompt, create_cover_letter_prompt
 from processors.resume_processor import (
     load_adapt_info, adapt_info_to_text, json_to_resume_text,
@@ -54,14 +54,18 @@ def generate_resume_and_cover_letter(form_data):
             # Merge adapted content with base resume
             final_resume = merge_resume_data(resume_data, adapted_content)
 
+            # Check if company folder exists, create if not
+            create_folder_if_not_exists("outputs", safe_company_name)
             # Save files
-            resume_json_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.json"
+            resume_json_filename = f"outputs/{safe_company_name}/adapted_resume_{safe_company_name}_{language}.json"
+
+
             save_json(resume_json_filename, final_resume)
             print(f"💾 JSON file saved: {resume_json_filename}")
 
             # Convert to text
             adapted_resume_text = json_to_resume_text(final_resume)
-            resume_text_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.txt"
+            resume_text_filename = f"outputs/{safe_company_name}/adapted_resume_{safe_company_name}_{language}.txt"
             save_text(resume_text_filename, adapted_resume_text)
             print(f"📄 Text file saved: {resume_text_filename}")
 
@@ -73,7 +77,7 @@ def generate_resume_and_cover_letter(form_data):
 
         else:
             # Fallback for failed JSON parsing
-            resume_text_filename = f"outputs/adapted_resume_{safe_company_name}_{language}.txt"
+            resume_text_filename = f"outputs/{safe_company_name}/adapted_resume_{safe_company_name}_{language}.txt"
             fallback_text = f"RESUME ADAPTATION FAILED - USING ORIGINAL DATA\n\n"
             fallback_text += f"Original response from LLM:\n{adapted_content_json}\n\n"
             fallback_text += json_to_resume_text(resume_data)
@@ -125,7 +129,7 @@ def _generate_cover_letter(company_name, job_offer, resume_content, language, sa
     print("📝 Generating cover letter...")
     cover_letter = run_llm(cover_prompt, cover_system)
 
-    cover_filename = f"outputs/cover_letter_{safe_company_name}_{language}.txt"
+    cover_filename = f"outputs/{safe_company_name}/cover_letter_{safe_company_name}_{language}.txt"
     save_text(cover_filename, cover_letter)
     print(f"💌 Cover letter saved: {cover_filename}")
 

@@ -14,6 +14,12 @@ def load_json(file_path):
         return json.load(f)
 
 
+def create_folder_if_not_exists(folder_path, name):
+    """Create a folder if it does not exist"""
+    if not os.path.exists(os.path.join(folder_path, name)):
+        os.makedirs(os.path.join(folder_path, name))
+
+
 def save_text(file_path, content):
     """Save text content to a file"""
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
