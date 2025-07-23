@@ -10,12 +10,14 @@ class ResumeGeneratorGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Resume Generator")
-        self.root.geometry("800x600")
+        self.root.geometry("900x700")
         self.root.resizable(True, True)
 
         # Variables to store form data
         self.company_name = tk.StringVar()
         self.language_choice = tk.StringVar(value="English")
+        self.country_code = tk.StringVar(value="UK")
+        self.city = tk.StringVar(value="London")
 
         self.create_widgets()
 
@@ -28,18 +30,18 @@ class ResumeGeneratorGUI:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         main_frame.columnconfigure(1, weight=1)
-        main_frame.rowconfigure(4, weight=1)
+        main_frame.rowconfigure(6, weight=1)
 
         # Title
         title_label = ttk.Label(main_frame, text="Resume Work Experience & Skills Adapter",
-                               font=("Arial", 14, "bold"))
+                                font=("Arial", 14, "bold"))
         title_label.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 
         # Info label
         info_label = ttk.Label(main_frame,
-                              text="Generates JSON, TXT, and HTML resumes with adapted work experience and skills",
-                              font=("Arial", 10),
-                              foreground="gray")
+                               text="Generates JSON, TXT, and HTML resumes with adapted work experience and skills",
+                               font=("Arial", 10),
+                               foreground="gray")
         info_label.grid(row=1, column=0, columnspan=2, pady=(0, 15))
 
         # Company Name Input
@@ -55,27 +57,52 @@ class ResumeGeneratorGUI:
         )
         company_entry.grid(row=2, column=1, sticky=(tk.W, tk.E), pady=(0, 15))
 
-        # Job Offer Input (Large text area)
-        ttk.Label(main_frame, text="Job Offer Description:", font=("Arial", 12)).grid(
-            row=3, column=0, sticky=(tk.W, tk.N), pady=(0, 5)
+        # Location Frame (City and Country Code)
+        location_frame = ttk.LabelFrame(main_frame, text="Location Information", padding="10")
+        location_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 15))
+        location_frame.columnconfigure(1, weight=1)
+        location_frame.columnconfigure(3, weight=1)
+
+        # City Input
+        ttk.Label(location_frame, text="City:", font=("Arial", 11)).grid(
+            row=0, column=0, sticky=tk.W, padx=(0, 10)
         )
 
-        self.job_offer_text = scrolledtext.ScrolledText(
-            main_frame,
-            width=60,
-            height=12,
-            font=("Arial", 10),
-            wrap=tk.WORD
+        city_entry = ttk.Entry(
+            location_frame,
+            textvariable=self.city,
+            font=("Arial", 11),
+            width=25
         )
-        self.job_offer_text.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 15))
+        city_entry.grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(0, 20))
+
+        # Country Code Input
+        ttk.Label(location_frame, text="Country Code:", font=("Arial", 11)).grid(
+            row=0, column=2, sticky=tk.W, padx=(0, 10)
+        )
+
+        country_entry = ttk.Entry(
+            location_frame,
+            textvariable=self.country_code,
+            font=("Arial", 11),
+            width=10
+        )
+        country_entry.grid(row=0, column=3, sticky=tk.W)
+
+        # Helper text for location
+        location_help = ttk.Label(location_frame,
+                                 text="Example: City: 'London', Country Code: 'UK' or 'GB'",
+                                 font=("Arial", 9),
+                                 foreground="gray")
+        location_help.grid(row=1, column=0, columnspan=4, sticky=tk.W, pady=(5, 0))
 
         # Language Selection
         ttk.Label(main_frame, text="Language:", font=("Arial", 12)).grid(
-            row=5, column=0, sticky=tk.W, pady=(0, 5)
+            row=4, column=0, sticky=tk.W, pady=(0, 5)
         )
 
         language_frame = ttk.Frame(main_frame)
-        language_frame.grid(row=5, column=1, sticky=tk.W, pady=(0, 15))
+        language_frame.grid(row=4, column=1, sticky=tk.W, pady=(0, 15))
 
         languages = ["English", "Spanish", "German"]
         for lang in languages:
@@ -87,9 +114,23 @@ class ResumeGeneratorGUI:
                 command=self.on_language_change
             ).pack(side=tk.LEFT, padx=(0, 20))
 
+        # Job Offer Input (Large text area)
+        ttk.Label(main_frame, text="Job Offer Description:", font=("Arial", 12)).grid(
+            row=5, column=0, sticky=(tk.W, tk.N), pady=(0, 5)
+        )
+
+        self.job_offer_text = scrolledtext.ScrolledText(
+            main_frame,
+            width=60,
+            height=12,
+            font=("Arial", 10),
+            wrap=tk.WORD
+        )
+        self.job_offer_text.grid(row=6, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 15))
+
         # Buttons Frame
         button_frame = ttk.Frame(main_frame)
-        button_frame.grid(row=6, column=0, columnspan=2, pady=(20, 0))
+        button_frame.grid(row=7, column=0, columnspan=2, pady=(20, 0))
 
         # Generate Resume Button
         ttk.Button(
@@ -123,6 +164,8 @@ class ResumeGeneratorGUI:
         company = self.company_name.get().strip()
         job_offer = self.job_offer_text.get("1.0", tk.END).strip()
         language = self.language_choice.get()
+        city = self.city.get().strip()
+        country_code = self.country_code.get().strip()
 
         # Basic validation
         if not company:
@@ -137,7 +180,9 @@ class ResumeGeneratorGUI:
         form_data = {
             "company_name": company,
             "job_offer": job_offer,
-            "language": language
+            "language": language,
+            "city": city,
+            "country_code": country_code
         }
 
         # Show progress message
@@ -231,21 +276,22 @@ class ResumeGeneratorGUI:
             # Show error message
             messagebox.showerror("Error", result['message'])
 
-        # Here you would call your resume generation logic
-        # For example: generate_resume_function(company, job_offer, language)
-
     def clear_form(self):
         """Clear all form fields"""
         self.company_name.set("")
         self.job_offer_text.delete("1.0", tk.END)
         self.language_choice.set("English")
+        self.city.set("")
+        self.country_code.set("")
 
     def get_form_data(self):
         """Get current form data as a dictionary"""
         return {
             "company_name": self.company_name.get().strip(),
             "job_offer": self.job_offer_text.get("1.0", tk.END).strip(),
-            "language": self.language_choice.get()
+            "language": self.language_choice.get(),
+            "city": self.city.get().strip(),
+            "country_code": self.country_code.get().strip()
         }
 
 

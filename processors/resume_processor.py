@@ -5,7 +5,7 @@ from utils.file_operations import load_json, save_json, save_text
 def load_adapt_info():
     """Load the work experience and skills to adapt from adapt_info.json"""
     try:
-        return load_json("inputs/adapt_info.json")
+        return load_json("inputs/it_jobs/adapt_info.json")
     except FileNotFoundError:
         # Return default structure if file doesn't exist
         return {

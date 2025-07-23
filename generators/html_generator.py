@@ -2,7 +2,7 @@ import os
 from utils.file_operations import load_text
 
 
-def generate_html_resume(adapted_resume_data, company_name, language):
+def generate_html_resume(adapted_resume_data, company_name, language, country_code, city):
     """
     Generate HTML resume using the template and adapted data
 
@@ -34,7 +34,9 @@ def generate_html_resume(adapted_resume_data, company_name, language):
             work_html,
             skills_html,
             projects_html,
-            education_html
+            education_html,
+            country_code,
+            city
         )
 
         # Save HTML file
@@ -213,7 +215,7 @@ def _update_date_range(existing_job, new_job):
         existing_job['endDate'] = new_end
 
 
-def _replace_template_content(html_template, resume_data, profiles_html, work_html, skills_html, projects_html, education_html):
+def _replace_template_content(html_template, resume_data, profiles_html, work_html, skills_html, projects_html, education_html, country_code, city):
     """Replace all content in the HTML template"""
     html_content = html_template
 
@@ -224,7 +226,10 @@ def _replace_template_content(html_template, resume_data, profiles_html, work_ht
 
     # Location
     location_info = resume_data.get('contactInfo', {}).get('location', {})
-    if isinstance(location_info, dict):
+
+    if country_code and city:
+        location_text = f"{city}, {country_code}"
+    elif isinstance(location_info, dict):
         location_text = f"{location_info.get('city', '')}, {location_info.get('countryCode', '')}"
     else:
         location_text = str(location_info)

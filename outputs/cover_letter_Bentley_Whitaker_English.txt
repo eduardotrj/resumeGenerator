@@ -1,23 +1,33 @@
+[Bentley Whitaker Logo]
+[Your Name]
+[Address]
+[City, Postcode]
+[Email Address]
+[Phone Number]
+[Date]
+
+Mr./Ms. [Hiring Manager's Name],
 Bentley Whitaker,
-Notting Hill, London.
+Notting Hill,
 
-Dear Hiring Manager,
+Dear [Hiring Manager's Name],
 
-I am writing to express my excitement at applying for the Back End Engineer role at Bentley Whitaker, where I can leverage my technical expertise in Java, Python, AWS, and NoSQL to contribute to the development of cutting-edge artificial intelligence solutions. As a seasoned software developer with experience working on complex projects, I am confident that I would thrive in your dynamic team.
+I am excited to apply for the Back End Engineer position at Bentley Whitaker, where I can contribute my skills and experience in building innovative artificial intelligence solutions using novel machine learning techniques. With a strong background in Java, Python, and cloud technologies, I am confident that I would be an excellent fit for your team.
 
-I was particularly drawn to this role because of Bentley Whitaker's commitment to pushing boundaries through innovative machine learning techniques. Your company's vision resonates with my passion for staying at the forefront of technological advancements, and I am eager to be a part of a talented group of engineers shaping the future of AI.
+As a seasoned Software Developer with a passion for cutting-edge technology, I have been following Bentley Whitaker's remarkable journey in revolutionizing its industry with AI-driven solutions. Your company's commitment to pushing the boundaries of what is possible resonates deeply with me, and I am thrilled about the opportunity to join a talented team of engineers who share my enthusiasm for innovation.
 
-In my current role as Back-end Developer at HABLA (2024-01 - 2025-04), I have honed my skills in designing and optimizing scalable REST APIs using Python (FastAPI, Django) and Java for enhanced performance. My experience with AWS-based backend services has allowed me to boost platform efficiency by 20%, while optimizing SQL queries to reduce database execution time by 30%. Additionally, I have developed Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes for modern backend solutions.
+In my current role as a Backend-Developer at HABLA (2024-01 - 2025-04), I have gained valuable experience in designing and optimizing REST APIs using Java, Python, and frameworks such as FastAPI and Django. My expertise in cloud technologies, including AWS (EC2, S3, Lambda, RDS, API Gateway), has enabled me to deploy scalable applications that enhance platform performance. Additionally, I have built Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes, demonstrating my proficiency in modern backend technologies.
 
-I am impressed by Bentley Whitaker's emphasis on fostering a collaborative environment where engineers can share knowledge and expertise. As someone who thrives in dynamic settings, I appreciate the opportunity to work with technologists who have helped build some of the world's leading technology companies today.
+I am particularly drawn to Bentley Whitaker's focus on AI and Machine Learning, and I am excited about the opportunity to work with a variety of languages, frameworks, and tools. My experience and interest in these areas align perfectly with the requirements of this role, and I am confident that I would be able to make a significant contribution to your team.
 
-My skills align perfectly with the requirements outlined for this role. In addition to my technical proficiency in Java and Python, I possess a solid understanding of cloud technologies (AWS) and microservices. My experience with NoSQL databases, machine learning, and REST APIs also makes me an ideal fit for this position.
+Thank you for considering my application. I have attached my resume and portfolio, which provide further details about my skills and experience. I look forward to discussing this opportunity further and learning more about Bentley Whitaker's innovative work in AI-driven solutions.
 
-I would welcome the opportunity to discuss how my skills and experience can contribute to Bentley Whitaker's success. You may view more details about my work history and skills on my LinkedIn profile (https://www.linkedin.com/in/eduardotrj/) or GitHub page (https://github.com/eduardotrj).
-
-Thank you for considering my application. I look forward to the opportunity to meet with your team.
+Please feel free to contact me at [eduardo.work.world@gmail.com](mailto:eduardo.work.world@gmail.com) or +44 07858 085779.
 
 Sincerely,
 
 Eduardo Trujillo
-Software Developer
+
+[Your LinkedIn Profile Link]
+[Your Github Profile Link]
+[Your Portfolio Link]

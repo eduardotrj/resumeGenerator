@@ -6,6 +6,7 @@ from processors.resume_processor import (
     parse_llm_json_response, merge_resume_data, create_safe_filename
 )
 from generators.html_generator import generate_html_resume
+from db.db import save_generation
 
 
 def generate_resume_and_cover_letter(form_data):
@@ -21,7 +22,7 @@ def generate_resume_and_cover_letter(form_data):
     """
     try:
         # Load base resume data
-        resume_data = load_json("inputs/resume.json")
+        resume_data = load_json("inputs/it_jobs/resume.json")
 
         # Load adaptation data
         adapt_data = load_adapt_info()
@@ -31,6 +32,8 @@ def generate_resume_and_cover_letter(form_data):
         company_name = form_data.get('company_name', '')
         job_offer = form_data.get('job_offer', '')
         language = form_data.get('language', 'English')
+        city = form_data.get('city', '')
+        country_code = form_data.get('country_code', '')
 
         # Create adaptation prompt
         adaptation_prompt, system_message = create_adaptation_prompt(job_offer, adapt_text, language)
@@ -63,9 +66,10 @@ def generate_resume_and_cover_letter(form_data):
             print(f"📄 Text file saved: {resume_text_filename}")
 
             # Generate HTML
-            html_filename = generate_html_resume(final_resume, company_name, language)
+            html_filename = generate_html_resume(final_resume, company_name, language, country_code, city)
             if html_filename:
                 print(f"🌐 HTML file saved: {html_filename}")
+                save_generation(company_name, job_offer, language, country_code, city)
 
         else:
             # Fallback for failed JSON parsing

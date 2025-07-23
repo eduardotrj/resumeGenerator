@@ -1,5 +1,7 @@
 import sys
 import os
+from db.db import init_db
+
 
 # Add current directory to Python path for imports
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -9,6 +11,9 @@ from generators.resume_generator import generate_resume_and_cover_letter, test_l
 
 def main():
     """Main entry point - launches the GUI"""
+    # Initialize the database
+    init_db()
+
     try:
         print("🚀 Launching Resume Generator GUI...")
         from view import ResumeGeneratorGUI

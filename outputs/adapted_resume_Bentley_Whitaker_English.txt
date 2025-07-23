@@ -13,13 +13,8 @@ Codepen: https://codepen.io/eduardotrj
 
 Work Experience:
 
-Back-end Developer at HABLA (2024-01 - 2025-04)
-• Designed and optimized scalable REST APIs using Python (FastAPI, Django), and Java for enhanced performance.
-• Implemented AWS-based backend services (EC2, S3, Lambda, RDS, API Gateway) to boost platform efficiency by 20%.
-• Optimized SQL queries to reduce database execution time by 30%, ensuring efficient data processing.
-• Developed Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes for modern backend solutions.
-
-Web Developer at Valor de Ley (2021-10 - 2023-12)
-• Utilized Python (Django), Java, and NoSQL for scalable application development, demonstrating versatility in full-stack technologies.
-• Developed AWS-based solutions using EC2, S3, Lambda, RDS, API Gateway, showcasing expertise in cloud infrastructure.
-• Improved website performance by 40% through SEO optimization and load speed enhancements, aligning with software quality best practices.
+Backend-Developer at HABLA (2024-01 - 2025-04)
+• Designed and optimized REST APIs using Java, Python, and frameworks such as FastAPI and Django for scalable applications.
+• Implemented backend services deployed on AWS (EC2, S3, Lambda, RDS, API Gateway) to enhance platform performance by 20%.
+• Built Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes, demonstrating expertise in modern backend technologies.
+• Enhanced database efficiency through SQL query optimization, resulting in a 30% reduction in execution time.
