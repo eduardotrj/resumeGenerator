@@ -1,0 +1,25 @@
+You are a professional resume editor. Adapt the resume below to align closely with the following job offer.
+
+--- Job Offer ---
+{job_offer}
+
+--- Resume ---
+{resume}
+
+--- Output Format Requirements ---
+Return the improved resume in the following JSON schema format:
+
+{schema}
+
+--- Instructions ---
+1. Adapt the resume content to better match the job offer requirements
+2. Highlight relevant skills and experiences that align with the job
+3. Tailor the job summary to reflect the job requirements in 4 sentences
+4. Maintain all original contact information and profiles
+5. Ensure all work experience is relevant and properly formatted
+6. Include relevant skills that match the job posting
+7. Return ONLY the JSON object following the exact schema structure above
+8. Do not include any explanatory text, markdown formatting, or code blocks - just the raw JSON
+
+--- Output ---
+Return only the improved resume as a valid JSON object following the schema structure.

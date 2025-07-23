@@ -7,4 +7,4 @@ You are a professional recruiter. Create a cover letter based on the resume and 
 {resume}
 
 --- Output ---
-Generate a persuasive, personalized cover letter.
+Generate a persuasive, personalized cover letter adding the current date exluding address and contact section.

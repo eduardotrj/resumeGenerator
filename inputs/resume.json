@@ -2,7 +2,6 @@
 {
   "name": "Eduardo Trujillo",
   "label": "Software Developer",
-  "summary": "Software Engineer passionate about building scalable and resilient applications. Deep knowledge about different scalable architectures, including the trade-offs, the best DB for each service, and the best methodologies and practices, helping me to keep a product focus. Experience with Agile, TDD and CI/CD to offer the best customer experience, including automation, monitoring, cybersecurity and knowledge in deploy tools like Docker or Kubernetes to add best value.",
   "contactInfo": {
     "email": "eduardo.work.world@gmail.com",
     "phone": "+44 07858 085779",
@@ -10,16 +9,16 @@
       "address": "33 Zion house",
       "postalCode": "E1 3EN",
       "city": "London",
-      "countryCode": "United Kingdom",
+      "countryCode": "UK",
       "region": "London"
     }
   },
   "profiles": [{
     "linkedIn": "https://www.linkedin.com/in/eduardotrj/",
     "github": "https://github.com/eduardotrj",
-    "website": "https://eduardotrj.github.io/website/",
+    "portfolio": "https://eduardotrj.github.io/website/",
     "substack": "https://elguardian.substack.com/",
-    "portfolio": "https://eduardotrj.github.io/website/"
+    "codepen": "https://codepen.io/eduardotrj"
   }],
   "work": [{
     "title": "BACKEND-DEVELOPER",
@@ -27,12 +26,20 @@
     "dates": "01/2024 - 04/2025",
     "startDate": "2024-01-01",
     "endDate": "2025-04-01",
-      "summary": [
-        "• Designed and optimized REST APIs using Python (FastAPI, Django) for scalable applications, aligning with microservice architecture principles.",
-        "• Implemented backend services deployed on AWS (EC2, S3, Lambda, RDS, API Gateway) to enhance platform performance by 20%.",
-        "• Enhanced database efficiency through SQL query optimization, resulting in a 30% reduction in execution time.",
-        "• Built Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes, demonstrating expertise in modern backend technologies.",
-        "• Collaborated in Agile team settings, actively participating in code reviews and unit testing to uphold software quality standards."
+    "location": "remote",
+    "summary": [
+        {
+          "bullet": "Designed and optimized REST APIs using Python (FastAPI, Django), and Java for scalable applications."
+        },
+        {
+          "bullet": "Implemented backend services deployed on AWS (EC2, S3, Lambda, RDS, API Gateway) to enhance platform performance by 20%."
+        },
+        {
+          "bullet": "Enhanced database efficiency through SQL query optimization, resulting in a 30% reduction in execution time."
+        },
+        {
+          "bullet": "Built Microservice infrastructure using Event-Driven architecture, RabbitMQ, AsyncAPI, and Kubernetes, demonstrating expertise in modern backend technologies."
+        }
       ]
     },
     {
@@ -42,71 +49,45 @@
       "endDate": "2023-12-31",
       "location": "Madrid, SPAIN",
       "summary": [
-        "• Developed and maintained web applications using Javascript, CSS, HTML, and PHP, showcasing backend development skills in a customer-facing digital platform context.",
-        "• Improved website SEO and load speed, increasing site traffic by 40% and aligning with best practices in software quality and DevOps.",
-        "• Implemented security best practices to reduce vulnerabilities by 85%, ensuring the reliability and security of the platform.",
-        "• Mentored junior developers to enhance team productivity and foster a culture of continuous learning and improvement."
+        {
+          "bullet": "Build simple and complex web applications using PHP, and Laravel, demonstrating a strong understanding of web development frameworks."
+        },
+        {
+          "bullet": "Build solutions using Python, Django, and React, showcasing versatility in full-stack development."
+        },
+        {
+          "bullet": "Improved website SEO and load speed, increasing site traffic by 40% and aligning with best practices in software quality."
+        },
+        {
+          "bullet": "Implemented security best practices to reduce vulnerabilities by 85%, ensuring the reliability and security of the platform."
+
+        }
       ]
     }],
   "skills": [
     {
-    "programmingLanguages": ["Python", "Java", "Kotlin", "JavaScript", "SQL", "C", "C++", "PHP"]
+     "programmingLanguages": ["Python", "Java", "Kotlin", "JavaScript", "SQL", "C", "C++", "PHP"]
     },
     {
-      "generativeAI": ["OpenAI", "LLama", "LangChain", "RAG"]
+      "databaseSystems": ["MySQL", "PostgreSQL", "MongoDB", "DynamoDB"]
     },
     {
-    "databaseSystems": ["SQL (MySQL, PostgreSQL)", "Big Query", "MongoDB", "DynamoDB", "Firebase"]
+      "Libraries": ["Pandas", "NumPy", "Scikit-learn", "Selenium", "Celery", "Pytest"]
     },
     {
-      "versionControl": ["Git", "GitHub", "GitLab"]
-    },
-    {
-      "operatingSystems": ["Linux", "Windows", "MacOS"]
-    },
-    {
-      "dataScienceAndMLLibraries": ["Pandas", "NumPy", "Scikit-learn"]
-    },
-    {
-      "machineLearning": ["Supervised Learning", "Unsupervised Learning"]
-    },
-    {
-      "webDevelopment": ["Django", "FastAPI", "Typescript, React", "HTML", "CSS", "Laravel", "Spring Boot"]
+      "webDevelopment": ["Django", "FastAPI", "Typescript", "React", "Laravel", "Spring Boot"]
     },
     {
       "cloudAndDevOps": ["AWS (EC2, S3)", "Docker", "Kubernetes", "Microservices"]
     },
     {
-      "testingAndDebugging": ["Pytest", "Selenium", "Postman", "Jest"]
+      "Methodologies": ["Scrum", "TDD Agile", "DevOps", "CI/CD"]
     },
     {
-      "Electronics Design": ["Eagle", "Proteus", "KitCad", "Microcontrollers"]
-    },
-    {
-      "CI_CD": ["Jenkins", "GitHub Actions", "GitLab CI/CD"]
-    },
-    {
-      "automationAndWebScraping": ["Selenium", "Beautiful Soup"]
-    },
-    {
-      "agileMethodologies": ["Scrum", "TDD Agile", "DevOps", "CI/CD"]
-    },
-    {
-      "internet": ["REST APIs", "GraphQL", "WebSockets", "AsyncAPI", "RabbitMQ", "Celery", "Redis", "cybersecurity"]
+      "languages": ["English", "Spanish", "German"]
     }],
-  "languages": [{
-    "language": "English",
-    "fluency": "Native speaker"
-  },
-  {
-    "language": "Spanish",
-    "fluency": "Native speaker"
-  },
-  {
-    "language": "German",
-    "fluency": "Intermediate"
-  }],
-  "project": [{
+
+  "projects": [{
     "name": "inventory Management System",
     "stack": ["Django", "Celery", "OpenAi", "PostgreSQL", "RabbitMQ", "React", "Celery", "Redis"],
     "description": "A web application for managing inventory, built with Django and PostgreSQL, designed to handle large datasets efficiently.",
@@ -126,8 +107,8 @@
   },
   {
     "name": "Customize NotePad",
-    "stack": ["Python", "Tkinder"],
-    "description": "A customizable notepad application built with Python and Tkinter, allowing users to create and manage notes easily.",
+    "stack": ["Python", "Tkinter"],
+    "description": "A customizable notepad application built with Python and Tkinter, allowing users to create notes with styles and index.",
     "link": "https://github.com/eduardotrj/notepad-py"
   },
   {

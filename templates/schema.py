@@ -18,9 +18,9 @@ schema = {
     "profiles": [{
         "linkedIn": { "type": "string" },
         "github": { "type": "string" },
-        "website": { "type": "string" },
         "substack": { "type": "string" },
-        "portfolio": { "type": "string" }
+        "portfolio": { "type": "string" },
+        "codepen": { "type": "string" }
   }],
     "work": [{
         "title": { "type": "string" },

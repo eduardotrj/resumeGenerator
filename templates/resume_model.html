@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            line-height: 1.2;
+            color: #000;
+            background-color: rgb(61, 61, 61);
+            padding: 20px 20px; max-width: 100vw;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        ul { list-style-type: "• "; }
+
+
+        #Document {
+            max-width: 1200px;
+            background-color: white;
+            box-shadow: 1px 5px 15px 10px rgba(0,0,0,0.39);
+            -webkit-box-shadow: 1px 5px 15px 10px rgba(0,0,0,0.39);
+            -moz-box-shadow: 1px 5px 15px 10px rgba(0,0,0,0.39);
+            margin: auto;
+            padding: 36px 50px;
+        }
+
+        /* .container {
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 10%;
+        } */
+
+        .header {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .section {
+            margin-bottom: 25px;
+
+        }
+        h2 {
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 3px solid #333;
+            padding-bottom: 2px;
+            margin-bottom: 5px;
+        }
+
+        .item{
+            margin-bottom: 14px;
+        }
+        .headerText {
+            font-size: 12px;
+            color: #000;
+            font-style: normal;
+            font-weight: normal;
+        }
+        a{
+            font-size: 12px;
+            color: #145686;
+            font-style: normal;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        .titleText{
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .cursiveText {
+            font-size: 12px;
+            font-style: italic;
+            font-weight: normal;
+            color: #000;
+            margin-bottom: 5px;
+        }
+        .boldText {
+            font-size: 12px;
+            padding-left: 0;
+            margin-top: 5px;
+            font-style: normal;
+            font-weight: bold;
+            color: #000;
+        }
+        .regularText {
+            font-size: 12px;
+            padding-left: 0;
+            margin-top: 5px;
+            font-style: normal;
+            font-weight: normal;
+            color: #000;
+        }
+        .allInLine {
+            display: inline;
+        }
+        .separatedText {
+            display: flex;
+            font-size: 14px;
+            font-style: italic;
+            font-weight: normal;
+            color: #000;
+            /* margin-bottom: 5px; */
+            align-content: space-between;
+        }
+        .separatedText span {
+            width: 50%;
+        }
+        .separatedText span:last-child {
+            text-align: right;
+        }
+
+
+        .project-link {
+            color: #3498db;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="Document">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="name" id="name">John Doe</h1>
+                <!-- <div class="label" id="label">Full Stack Developer</div> -->
+                <!-- <p class="summary" id="summary">Passionate developer with 5+ years of experience creating innovative web applications and leading technical teams to deliver exceptional user experiences.</p> -->
+            </div>
+
+            <div class="contact-info headerText" id="contact-info">
+                    <span id="email">john.doe@example.com</span>,
+                    <span id="phone">+1 (555) 123-4567</span>,
+                    <span class="location" id="location">San Francisco, CA</span>
+            </div>
+
+            <div class="profile" id="profiles">
+                <a href="#" class="profile-link " data-type="linkedIn">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="#" class="profile-link" data-type="github">
+                    <span>🐱</span> GitHub
+                </a>
+                <a href="#" class="profile-link" data-type="portfolio">
+                    <span>💻</span> Portfolio
+                </a>
+                <a href="#" class="profile-link" data-type="substack">
+                    <span>🗞️</span> substack
+                </a>
+                <a href="#" class="profile-link" data-type="codepen">
+                    <span>🎨</span> Codepen
+                </a>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <main class="container">
+                <section class="section">
+                    <h2>Work Experience</h2>
+                    <div id="work">
+                    </div>
+                </section>
+                <section class="section">
+                    <h2>Technical Skills</h2>
+                    <div class="skills-grid" id="skills">
+                        <ul class="skills-list">
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Projects</h2>
+                    <div id="projects">
+
+                    </div>
+                </section>
+                <section class="section">
+                    <h2>Education</h2>
+                    <div id="education">
+
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

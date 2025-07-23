@@ -5,6 +5,7 @@ MODEL = "llama-3.2-8b-instruct"
 
 client = OpenAI(base_url=f"http://{SERVER_API_HOST}/v1", api_key="lm-studio")
 
+
 def run_llm(prompt, system_message="You are a helpful assistant."):
     """
     Run LLM with the given prompt and system message
@@ -23,7 +24,7 @@ def run_llm(prompt, system_message="You are a helpful assistant."):
                 {"role": "system", "content": system_message},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=1500,
+            max_tokens=2000,
             temperature=0.7
         ).choices[0].message.content.strip()
         # Connect to the LM Studio client
@@ -33,6 +34,7 @@ def run_llm(prompt, system_message="You are a helpful assistant."):
         print(f"Error connecting to LM Studio: {e}")
         # Fallback error message
         return f"Error: Could not generate response. Make sure LM Studio is running on {SERVER_API_HOST}"
+
 
 # Test function - can be removed in production
 def test_connection():
@@ -46,6 +48,6 @@ def test_connection():
         print(f"❌ LM Studio connection failed: {e}")
         return False
 
+
 if __name__ == "__main__":
     test_connection()
-

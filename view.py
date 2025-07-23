@@ -28,11 +28,23 @@ class ResumeGeneratorGUI:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         main_frame.columnconfigure(1, weight=1)
-        main_frame.rowconfigure(2, weight=1)
+        main_frame.rowconfigure(4, weight=1)
+
+        # Title
+        title_label = ttk.Label(main_frame, text="Resume Work Experience & Skills Adapter",
+                               font=("Arial", 14, "bold"))
+        title_label.grid(row=0, column=0, columnspan=2, pady=(0, 10))
+
+        # Info label
+        info_label = ttk.Label(main_frame,
+                              text="Generates JSON, TXT, and HTML resumes with adapted work experience and skills",
+                              font=("Arial", 10),
+                              foreground="gray")
+        info_label.grid(row=1, column=0, columnspan=2, pady=(0, 15))
 
         # Company Name Input
         ttk.Label(main_frame, text="Company Name:", font=("Arial", 12)).grid(
-            row=0, column=0, sticky=tk.W, pady=(0, 5)
+            row=2, column=0, sticky=tk.W, pady=(0, 5)
         )
 
         company_entry = ttk.Entry(
@@ -41,29 +53,29 @@ class ResumeGeneratorGUI:
             font=("Arial", 11),
             width=40
         )
-        company_entry.grid(row=0, column=1, sticky=(tk.W, tk.E), pady=(0, 15))
+        company_entry.grid(row=2, column=1, sticky=(tk.W, tk.E), pady=(0, 15))
 
         # Job Offer Input (Large text area)
         ttk.Label(main_frame, text="Job Offer Description:", font=("Arial", 12)).grid(
-            row=1, column=0, sticky=(tk.W, tk.N), pady=(0, 5)
+            row=3, column=0, sticky=(tk.W, tk.N), pady=(0, 5)
         )
 
         self.job_offer_text = scrolledtext.ScrolledText(
             main_frame,
             width=60,
-            height=15,
+            height=12,
             font=("Arial", 10),
             wrap=tk.WORD
         )
-        self.job_offer_text.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 15))
+        self.job_offer_text.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 15))
 
         # Language Selection
         ttk.Label(main_frame, text="Language:", font=("Arial", 12)).grid(
-            row=3, column=0, sticky=tk.W, pady=(0, 5)
+            row=5, column=0, sticky=tk.W, pady=(0, 5)
         )
 
         language_frame = ttk.Frame(main_frame)
-        language_frame.grid(row=3, column=1, sticky=tk.W, pady=(0, 15))
+        language_frame.grid(row=5, column=1, sticky=tk.W, pady=(0, 15))
 
         languages = ["English", "Spanish", "German"]
         for lang in languages:
@@ -77,12 +89,12 @@ class ResumeGeneratorGUI:
 
         # Buttons Frame
         button_frame = ttk.Frame(main_frame)
-        button_frame.grid(row=4, column=0, columnspan=2, pady=(20, 0))
+        button_frame.grid(row=6, column=0, columnspan=2, pady=(20, 0))
 
         # Generate Resume Button
         ttk.Button(
             button_frame,
-            text="Generate Resume",
+            text="Generate Resume (JSON + TXT + HTML)",
             command=self.generate_resume,
             style="Accent.TButton"
         ).pack(side=tk.LEFT, padx=(0, 10))
@@ -171,24 +183,53 @@ class ResumeGeneratorGUI:
             # Show success message with file paths
             files_list = "\n".join([f"• {os.path.basename(f)}" for f in result.get('files_created', [])])
 
-            success_message = (
-                f"✅ {result['message']}\n\n"
-                f"Files created:\n{files_list}\n\n"
-                f"Would you like to open the output folder?"
-            )
+            message = f"{result['message']}\n\nFiles created:\n{files_list}"
 
-            response = messagebox.askyesno("Success", success_message)
+            # Add HTML file info if available
+            if result.get('resume_html_file'):
+                message += f"\n\n📄 HTML Resume: {os.path.basename(result['resume_html_file'])}"
+
+            # Show success dialog with option to open files
+            response = messagebox.askyesno(
+                "Success!",
+                f"{message}\n\nWould you like to open the output folder?",
+                icon='question'
+            )
 
             if response:
                 # Open the outputs folder
+                import subprocess
+                import platform
+
                 output_dir = os.path.abspath("outputs")
-                if os.name == 'nt':  # Windows
-                    os.startfile(output_dir)
-                elif os.name == 'posix':  # macOS and Linux
-                    os.system(f'open "{output_dir}"' if os.uname().sysname == 'Darwin' else f'xdg-open "{output_dir}"')
+                try:
+                    if platform.system() == "Windows":
+                        subprocess.run(["explorer", output_dir])
+                    elif platform.system() == "Darwin":  # macOS
+                        subprocess.run(["open", output_dir])
+                    else:  # Linux
+                        subprocess.run(["xdg-open", output_dir])
+                except Exception as e:
+                    messagebox.showinfo("Info", f"Output folder: {output_dir}")
+
+            # Optionally open HTML file in browser
+            if result.get('resume_html_file'):
+                html_response = messagebox.askyesno(
+                    "Open HTML Resume?",
+                    "Would you like to view the HTML resume in your browser?",
+                    icon='question'
+                )
+
+                if html_response:
+                    import webbrowser
+                    try:
+                        webbrowser.open(f"file://{os.path.abspath(result['resume_html_file'])}")
+                    except Exception as e:
+                        messagebox.showerror("Error", f"Could not open HTML file: {e}")
+
         else:
             # Show error message
-            messagebox.showerror("Error", f"❌ {result['message']}")
+            messagebox.showerror("Error", result['message'])
 
         # Here you would call your resume generation logic
         # For example: generate_resume_function(company, job_offer, language)
