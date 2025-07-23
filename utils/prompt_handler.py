@@ -93,7 +93,8 @@ Create a personalized cover letter that:
 4. Demonstrates knowledge of the company/role
 5. Includes a strong opening and closing
 6. Keeps professional tone throughout
-7. Avoid including any extra information or text before "Dear Hiring Manager" or similar salutation
+7. Instead of addressing the hiring manager by name, use a more general greeting such as "Dear Team."
+8. Avoid including company details, personal information or any other unnecessary text.
 """
 
     return cover_prompt, system_message

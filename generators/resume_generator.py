@@ -1,3 +1,5 @@
+
+import re
 from local_llm_client import run_llm
 from utils.file_operations import load_json, save_json, save_text, create_folder_if_not_exists
 from utils.prompt_handler import create_adaptation_prompt, create_cover_letter_prompt
@@ -76,7 +78,7 @@ def generate_resume_and_cover_letter(form_data):
             print(f"📄 Text file saved: {resume_text_filename}")
 
             # Generate HTML
-            html_filename = generate_html_resume(final_resume, company_name, language, country_code, city)
+            html_filename = generate_html_resume(final_resume, company_name, language, country_code, city, adapt_data)
             if html_filename:
                 print(f"🌐 HTML file saved: {html_filename}")
                 html_to_pdf(html_filename, f"outputs/{safe_company_name}/{name_person}_resume.pdf")
@@ -136,11 +138,22 @@ def _generate_cover_letter(company_name, job_offer, resume_content, language, sa
     print("📝 Generating cover letter...")
     cover_letter = run_llm(cover_prompt, cover_system)
 
+    # Remove any company or person details from the cover letter
+    # cover_letter = cover_letter.replace(company_name, "[Company Name]").replace(name_person, "[Applicant Name]")
+    match = re.search(
+        r"(Dear Hiring|Sehr geehrte.*)",
+        cover_letter,
+        re.IGNORECASE | re.DOTALL)
+
+    if match:
+        trimmed = match.group(0)
+        cover_letter = cover_letter.replace(trimmed.strip(), "")
+
     cover_filename = f"outputs/{safe_company_name}/cover_letter_{safe_company_name}_{language}.txt"
     save_text(cover_filename, cover_letter)
     print(f"💌 Cover letter saved: {cover_filename}")
 
-    name_person = name_person.replace(" ", "_")
+    name_person = name_person.replace("_", " ")
 
     conversor = TxtToPDF(font="Arial", font_size=9, title_font_size=16)
     conversor.convert(cover_filename, f"outputs/{safe_company_name}/cover_letter_{name_person}.pdf", title=f"Cover Letter - {name_person}")

@@ -2,7 +2,7 @@ import os
 from utils.file_operations import load_text
 
 
-def generate_html_resume(adapted_resume_data, company_name, language, country_code, city):
+def generate_html_resume(adapted_resume_data, company_name, language, country_code, city, adapt_data):
     """
     Generate HTML resume using the template and adapted data
 
@@ -21,7 +21,7 @@ def generate_html_resume(adapted_resume_data, company_name, language, country_co
 
         # Generate each section
         profiles_html = _generate_profiles_html(adapted_resume_data)
-        work_html = _generate_work_html(adapted_resume_data)
+        work_html = _generate_work_html(adapted_resume_data, adapt_data)  # To fix any error by AI.
         skills_html = _generate_skills_html(adapted_resume_data)
         projects_html = _generate_projects_html(adapted_resume_data)
         education_html = _generate_education_html(adapted_resume_data)
@@ -35,6 +35,7 @@ def generate_html_resume(adapted_resume_data, company_name, language, country_co
             skills_html,
             projects_html,
             education_html,
+            language,
             country_code,
             city
         )
@@ -67,7 +68,7 @@ def _generate_profiles_html(resume_data):
     return profiles_html
 
 
-def _generate_work_html(resume_data):
+def _generate_work_html(resume_data, adapt_data):
     """Generate HTML for work experience with consolidation"""
     work_html = ""
     if 'work' in resume_data and resume_data['work']:
@@ -76,7 +77,7 @@ def _generate_work_html(resume_data):
 
         # Generate HTML for each job
         for job in consolidated_jobs.values():
-            date_range = _format_date_range(job)
+            date_range = _format_date_range(job, adapt_data)
             summary_html = _format_summary_list(job.get('summary', []))
 
             work_html += f'''
@@ -188,9 +189,17 @@ def _generate_education_html(resume_data):
     return education_html
 
 
-def _format_date_range(job):
+def _format_date_range(job, adapt_data):
     """Format date range for a job"""
+
     if 'startDate' in job and 'endDate' in job:
+
+        if job['startDate'] or job['endDate'] == "Null" or "None":
+            if adapt_data and 'work' in adapt_data:
+                for adapt_job in adapt_data['work']:
+                    if adapt_job.get('title') == job.get('title') and adapt_job.get('company') == job.get('company'):
+                        return f"{adapt_job['startDate']} - {adapt_job['endDate']}"
+
         return f"{job['startDate']} - {job['endDate']}"
     elif 'dates' in job:
         return job['dates']
@@ -215,7 +224,11 @@ def _update_date_range(existing_job, new_job):
         existing_job['endDate'] = new_end
 
 
-def _replace_template_content(html_template, resume_data, profiles_html, work_html, skills_html, projects_html, education_html, country_code, city):
+def _replace_template_content(
+                              html_template, resume_data, profiles_html,
+                              work_html, skills_html, projects_html,
+                              education_html, language, country_code,
+                              city):
     """Replace all content in the HTML template"""
     html_content = html_template
 
@@ -238,6 +251,9 @@ def _replace_template_content(html_template, resume_data, profiles_html, work_ht
     # Replace sections
     html_content = _replace_section(html_content, 'profiles', profiles_html)
     html_content = _replace_section(html_content, 'work', work_html)
+    if language != 'English':
+        html_content = _translate_titles(html_content, language)
+        print("💱 Titles translated to: ", language)
 
     if skills_html:
         html_content = _replace_section(html_content, 'skills', skills_html, 'skills-grid')
@@ -252,6 +268,101 @@ def _replace_template_content(html_template, resume_data, profiles_html, work_ht
 
     return html_content
 
+def language_dictionary(word, language):
+    """Return the necessary word translations for the resume"""
+
+    translations = {
+        'Work Experience': {
+            'English': 'Work Experience',
+            'Spanish': 'Experencia Laboral',
+            'German': 'Berufserfahrung'
+        },
+        'Technical Skills': {
+            'English': 'Technical Skills',
+            'Spanish': 'Habilidades Técnicas',
+            'German': 'Technische Fähigkeiten'
+        },
+        'Projects': {
+            'English': 'Projects',
+            'Spanish': 'Proyectos',
+            'German': 'Projekte'
+        },
+        'Education': {
+            'English': 'Education',
+            'Spanish': 'Educación',
+            'German': 'Ausbildung'
+        },
+        'Spain': {
+            'English': 'Spain',
+            'Spanish': 'España',
+            'German': 'Spanien'
+        },
+        'Germany': {
+            'English': 'Germany',
+            'Spanish': 'Alemania',
+            'German': 'Deutschland'
+        },
+        'United States': {
+            'English': 'United States',
+            'Spanish': 'Estados Unidos',
+            'German': 'Vereinigte Staaten'
+        },
+        'United Kingdom': {
+            'English': 'United Kingdom',
+            'Spanish': 'Reino Unido',
+            'German': 'Vereinigtes Königreich'
+        },
+        'Canada': {
+            'English': 'Canada',
+            'Spanish': 'Canadá',
+            'German': 'Kanada'
+        },
+        'Australia': {
+            'English': 'Australia',
+            'Spanish': 'Australia',
+            'German': 'Australien'
+        }
+        # Add more translations as needed
+    }
+
+    return translations.get(word, {}).get(language, word)
+
+
+def _translate_titles(html_content, language):
+    """Translate the <h2> section titles based on language"""
+
+    work_title = language_dictionary('Work Experience', language)
+    skills_title = language_dictionary('Technical Skills', language)
+    projects_title = language_dictionary('Projects', language)
+    education_title = language_dictionary('Education', language)
+
+    html_content = html_content.replace('<h2>Work Experience</h2>', f'<h2>{work_title}</h2>')
+    html_content = html_content.replace('<h2>Technical Skills</h2>', f'<h2>{skills_title}</h2>')
+    html_content = html_content.replace('<h2>Projects</h2>', f'<h2>{projects_title}</h2>')
+    html_content = html_content.replace('<h2>Education</h2>', f'<h2>{education_title}</h2>')
+    return html_content
+
+
+def _translate_location(html_content, country_code, city, language):
+    """Translate the location based on country code and city"""
+    if country_code and city:
+        location_text = f"{city}, {country_code}"
+    else:
+        location_text = f"{city}, {language_dictionary(country_code, language)}"
+
+    html_content = html_content.replace('San Francisco, CA', location_text)
+    return html_content
+
+
+def _change_title_language(html_content, language):
+    """Change the title based on the language"""
+    title_map = {
+        'English': 'Resume',
+        'Spanish': 'Currículum',
+        'German': 'Lebenslauf'
+    }
+    title = title_map.get(language, 'Resume')
+    return html_content.replace('Resume', title)
 
 def _replace_section(html_content, section_id, section_html, section_class=None):
     """Replace a specific section in the HTML"""

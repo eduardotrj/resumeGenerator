@@ -7,6 +7,7 @@ class TxtToPDF:
         self.font = font
         self.font_size = font_size
         self.title_font_size = title_font_size
+        self.lineHeight = 0.8  # Default line height for text
 
     def convert(self, txt_path, pdf_path=None, title=None):
         # if not os.path.exists(txt_path):
