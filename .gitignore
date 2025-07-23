@@ -1,3 +1,5 @@
 inputs/
 others/
 outputs/
+generations.db
+*.pycs
