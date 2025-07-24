@@ -35,10 +35,11 @@ CURRENT WORK EXPERIENCE AND SKILLS TO ADAPT:
 INSTRUCTIONS:
 1. Analyze the job offer requirements
 2. Adapt ONLY the work experience descriptions to highlight relevant accomplishments in 4 sentences
-3. Adapt ONLY the skills section to emphasize the most relevant technical and soft skills
-4. Use keywords from the job offer when appropriate
-5. Quantify achievements where possible
-6. Respond with ONLY valid JSON in this exact structure:
+3. Don't change Company Name or experience dates, just adapt the summary
+4. Adapt ONLY the skills section to emphasize the most relevant technical and soft skills
+5. Use keywords from the job offer when appropriate
+6. Quantify achievements where possibles
+7. Respond with ONLY valid JSON in this exact structure:
 
 {{
   "work": [

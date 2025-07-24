@@ -1,4 +1,5 @@
 import os
+import json
 from utils.file_operations import load_text
 
 
@@ -77,7 +78,7 @@ def _generate_work_html(resume_data, adapt_data):
 
         # Generate HTML for each job
         for job in consolidated_jobs.values():
-            date_range = _format_date_range(job, adapt_data)
+            date_range = _format_date_range(job)  # , adapt_data)
             summary_html = _format_summary_list(job.get('summary', []))
 
             work_html += f'''
@@ -189,18 +190,20 @@ def _generate_education_html(resume_data):
     return education_html
 
 
-def _format_date_range(job, adapt_data):
+def _format_date_range(job):   # , adapt_data = None
     """Format date range for a job"""
 
     if 'startDate' in job and 'endDate' in job:
 
-        if job['startDate'] or job['endDate'] == "Null" or "None":
-            if adapt_data and 'work' in adapt_data:
-                for adapt_job in adapt_data['work']:
-                    if adapt_job.get('title') == job.get('title') and adapt_job.get('company') == job.get('company'):
-                        return f"{adapt_job['startDate']} - {adapt_job['endDate']}"
+        # Disabled to maintain original dates always
+        # if job['startDate'] or job['endDate'] == "Null" or "None":
+        # if adapt_data and 'work' in adapt_data:
+        #     for adapt_job in adapt_data['work']:
+        #         if adapt_job.get('title') == job.get('title') and adapt_job.get('company') == job.get('company'):
+        #             return f"{adapt_job['startDate']} - {adapt_job['endDate']}"
 
         return f"{job['startDate']} - {job['endDate']}"
+
     elif 'dates' in job:
         return job['dates']
     return ""
@@ -222,6 +225,8 @@ def _update_date_range(existing_job, new_job):
         existing_job['startDate'] = new_start
     if new_end and (not existing_end or new_end > existing_end):
         existing_job['endDate'] = new_end
+
+
 
 
 def _replace_template_content(
@@ -267,6 +272,7 @@ def _replace_template_content(
         html_content = _replace_section(html_content, 'education', education_html)
 
     return html_content
+
 
 def language_dictionary(word, language):
     """Return the necessary word translations for the resume"""
@@ -363,6 +369,7 @@ def _change_title_language(html_content, language):
     }
     title = title_map.get(language, 'Resume')
     return html_content.replace('Resume', title)
+
 
 def _replace_section(html_content, section_id, section_html, section_class=None):
     """Replace a specific section in the HTML"""

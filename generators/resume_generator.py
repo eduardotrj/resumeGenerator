@@ -4,7 +4,7 @@ from local_llm_client import run_llm
 from utils.file_operations import load_json, save_json, save_text, create_folder_if_not_exists
 from utils.prompt_handler import create_adaptation_prompt, create_cover_letter_prompt
 from processors.resume_processor import (
-    load_adapt_info, adapt_info_to_text, json_to_resume_text,
+    load_adapt_info, load_resume_info, adapt_info_to_text, json_to_resume_text,
     parse_llm_json_response, merge_resume_data, create_safe_filename
 )
 from generators.html_generator import generate_html_resume
@@ -12,7 +12,6 @@ from generators.html_pdf_generator import html_to_pdf
 from generators.txt_pdf_generator import TxtToPDF
 from db.db import save_generation
 
-#
 
 def generate_resume_and_cover_letter(form_data):
     """
@@ -26,12 +25,6 @@ def generate_resume_and_cover_letter(form_data):
         dict: Contains paths to generated files and status
     """
     try:
-        # Load base resume data
-        resume_data = load_json("inputs/it_jobs/resume.json")
-
-        # Load adaptation data
-        adapt_data = load_adapt_info()
-        adapt_text = adapt_info_to_text(adapt_data)
 
         # Get form data
         company_name = form_data.get('company_name', '')
@@ -40,6 +33,24 @@ def generate_resume_and_cover_letter(form_data):
         city = form_data.get('city', '')
         country_code = form_data.get('country_code', '')
         name = form_data.get('name', 'Applicant')
+
+        # Select which adaptation data to use based on language
+        # In a future version, use it to choose different resume profiles.
+        if language == 'German':
+            folder = "it_de"
+
+        elif language == 'Spanish':
+            folder = "it_es"
+
+        else:
+            folder = "it_en"
+
+        # Load base resume data
+        resume_data = load_resume_info(folder)
+
+        # Load adaptation data
+        adapt_data = load_adapt_info(folder)
+        adapt_text = adapt_info_to_text(adapt_data)
 
         # Create adaptation prompt
         adaptation_prompt, system_message = create_adaptation_prompt(job_offer, adapt_text, language)
@@ -66,7 +77,6 @@ def generate_resume_and_cover_letter(form_data):
             create_folder_if_not_exists("outputs", safe_company_name)
             # Save files
             resume_json_filename = f"outputs/{safe_company_name}/adapted_resume_{safe_company_name}_{language}.json"
-
 
             save_json(resume_json_filename, final_resume)
             print(f"💾 JSON file saved: {resume_json_filename}")
@@ -153,10 +163,12 @@ def _generate_cover_letter(company_name, job_offer, resume_content, language, sa
     save_text(cover_filename, cover_letter)
     print(f"💌 Cover letter saved: {cover_filename}")
 
+    safe_person_name = create_safe_filename(name_person)
     name_person = name_person.replace("_", " ")
+    # company_name = company_name.replace("_", " ")
 
     conversor = TxtToPDF(font="Arial", font_size=9, title_font_size=16)
-    conversor.convert(cover_filename, f"outputs/{safe_company_name}/cover_letter_{name_person}.pdf", title=f"Cover Letter - {name_person}")
+    conversor.convert(cover_filename, f"outputs/{safe_company_name}/cover_letter_{safe_person_name}.pdf", title=f"Cover Letter by {name_person}")
 
     return cover_filename
 

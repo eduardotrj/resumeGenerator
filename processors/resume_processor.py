@@ -2,16 +2,24 @@ import json
 from utils.file_operations import load_json, save_json, save_text
 
 
-def load_adapt_info():
+def load_adapt_info(folder="it_jobs"):
     """Load the work experience and skills to adapt from adapt_info.json"""
     try:
-        return load_json("inputs/it_jobs/adapt_info.json")
+        return load_json("inputs/{folder}/adapt_info.json")
     except FileNotFoundError:
         # Return default structure if file doesn't exist
         return {
             "work": [],
             "skills": []
         }
+
+
+def load_resume_info(folder="it_jobs"):
+    """Load the base resume data from resume.json"""
+    try:
+        return load_json(f"inputs/{folder}/resume.json")
+    except FileNotFoundError:
+        raise FileNotFoundError("Base resume file not found: inputs/it_jobs/resume.json")
 
 
 def adapt_info_to_text(adapt_data):
@@ -133,6 +141,11 @@ def merge_resume_data(base_resume, adapted_content):
     if 'work' in adapted_content:
         final_resume['work'] = adapted_content['work']
         print(f"📊 Work experience adapted: {len(adapted_content['work'])} jobs")
+
+    # To keep consistency with the base resume,
+    # Reset company name and dates in work experience
+    for base_job, final_job in zip(base_resume['work'], final_resume['work']):
+        final_job.update({k: v for k, v in base_job.items() if k in ['company', 'startDate', 'endDate', 'location']})
 
     if 'skills' in adapted_content:
         final_resume['skills'] = adapted_content['skills']
