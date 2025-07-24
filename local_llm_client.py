@@ -25,7 +25,7 @@ def run_llm(prompt, system_message="You are a helpful assistant."):
                 {"role": "user", "content": prompt}
             ],
             max_tokens=2000,
-            temperature=0.7
+            temperature=0.3
         ).choices[0].message.content.strip()
         # Connect to the LM Studio client
         # Using the OpenAI client to connect to LM Studio

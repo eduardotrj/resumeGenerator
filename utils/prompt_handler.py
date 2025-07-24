@@ -35,8 +35,8 @@ CURRENT WORK EXPERIENCE AND SKILLS TO ADAPT:
 INSTRUCTIONS:
 1. Analyze the job offer requirements
 2. Adapt ONLY the work experience descriptions to highlight relevant accomplishments in 4 sentences
-3. Don't change Company Name or experience dates, just adapt the summary
-4. Adapt ONLY the skills section to emphasize the most relevant technical and soft skills
+3. Adapt ONLY the skills section to emphasize the most relevant technical and soft skills
+4. Keep same number of work experience entries
 5. Use keywords from the job offer when appropriate
 6. Quantify achievements where possibles
 7. Respond with ONLY valid JSON in this exact structure:
@@ -48,7 +48,7 @@ INSTRUCTIONS:
       "company": "Company Name",
       "startDate": "YYYY-MM",
       "endDate": "YYYY-MM or present",
-      "summary": ["Adapted bullet point 1", "Adapted bullet point 2"]
+      "summary": ["Adapted bullet point 1", "Adapted bullet point 2", "Adapted bullet point 3", "Adapted bullet point 4"])]
     }}
   ],
   "skills": [

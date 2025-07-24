@@ -142,14 +142,22 @@ def merge_resume_data(base_resume, adapted_content):
         final_resume['work'] = adapted_content['work']
         print(f"📊 Work experience adapted: {len(adapted_content['work'])} jobs")
 
-    # To keep consistency with the base resume,
+    # To keep consistency with the base resume,s
     # Reset company name and dates in work experience
     for base_job, final_job in zip(base_resume['work'], final_resume['work']):
-        final_job.update({k: v for k, v in base_job.items() if k in ['company', 'startDate', 'endDate', 'location']})
+        final_job.update({k: v for k, v in base_job.items() if k in ['company','title', 'startDate', 'endDate', 'location']})
 
     if 'skills' in adapted_content:
         final_resume['skills'] = adapted_content['skills']
         print(f"🎯 Skills adapted: {len(adapted_content['skills'])} categories")
+
+        # Add language skills from base resume if not already present
+        language_skills = base_resume['skills'][-1]
+        # language_skills['category'] = 'Languages'
+        # language_skills['items'] = base_resume['skills'][-1]['items']
+        final_resume['skills'].append(language_skills)
+
+        print(f"🎯 Skills LANGUAGE: {final_resume} ")
 
     return final_resume
 

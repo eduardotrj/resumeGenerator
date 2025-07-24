@@ -135,6 +135,7 @@ def generate_resume_and_cover_letter(form_data):
 
     except Exception as e:
         print(f"💥 Error in generate_resume_and_cover_letter: {e}")
+        print(f"📝 Raw LLM Response: {adapted_content_json}")
         return {
             'status': 'error',
             'message': f'Error generating documents: {str(e)}'
