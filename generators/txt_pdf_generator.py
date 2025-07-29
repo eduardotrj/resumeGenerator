@@ -56,3 +56,4 @@ class TxtToPDF:
 
         pdf.output(pdf_path)
         return pdf_path
+

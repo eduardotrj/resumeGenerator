@@ -63,6 +63,7 @@ def _generate_profiles_html(resume_data):
                     }
                     icon = icon_map.get(key.lower(), '🔗')
                     profiles_html += f'''
+                    print(f"👀 Generating profile link for {key}: {value}")
                 <a href="{value}" class="profile-link" data-type="{key.lower()}">
                     <span>{icon}</span> {key.capitalize()}
                 </a>'''
@@ -92,6 +93,8 @@ def _generate_work_html(resume_data, adapt_data):
                         {summary_html}
                     </ul>
                 </div>'''
+
+            print(f"💼 Generating work experience: {job.get('title', '')} at {job.get('company', '')}")
     return work_html
 
 

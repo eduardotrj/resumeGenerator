@@ -164,6 +164,9 @@ def _generate_cover_letter(company_name, job_offer, resume_content, language, sa
     save_text(cover_filename, cover_letter)
     print(f"💌 Cover letter saved: {cover_filename}")
 
+    cover_letter_example = cover_letter[:80]  # Show first 80 chars for debugging
+    print(f"📝 Cover Letter: {cover_letter_example}")
+
     safe_person_name = create_safe_filename(name_person)
     name_person = name_person.replace("_", " ")
     # company_name = company_name.replace("_", " ")
